@@ -213,7 +213,7 @@
 
 <div class="topbar">
   <h1>Permitting Kanban Board <span class="view-only-badge">VIEW ONLY</span></h1>
-  <div class="sub">Colors = municipality. Click "Details" on a card for its municipality-specific step checklist. This is a snapshot, refreshed at least daily. <span id="syncLine"></span></div>
+  <div class="sub">Colors = municipality. Click "Details" on a card for its municipality-specific step checklist. This is a snapshot, refreshed hourly. <span id="syncLine"></span></div>
   <div class="controls">
     <div class="legend" id="muniFilters"></div>
     <input type="text" class="search" id="searchBox" placeholder="Search property, opportunity #, permit #...">
@@ -265,19 +265,19 @@ function seedData() {
   return [
     {
       id: "p1", property: "Wood Residence - 177 Ridgeland Ave", opp: "",
-      permit: "26DEC-LH00030 / 26DEC-FE00026 (fence)", municipality: "Decatur", stage: "approved",
+      permit: "26DEC-LH00030 / 26DEC-FE00026 (fence)", municipality: "Decatur", stage: "under_review",
       elements: ["Patio / Hardscaping","Fence"],
       flags: [],
-      notes: "26DEC-LH00030 (Landscaping/Hardscaping) was issued 6/30. Fence permit 26DEC-FE00026 passed Arborist and Planning/Zoning review 6/30 - confirm whether it has been formally issued too. Multiple resubmittals resolved an impervious-calc issue (riprap + gravel path) with Devon Boullion (Decatur engineering).",
+      notes: "7/1: Fence permit (26DEC-FE00026) Building Dept review came back Not Approved (plan review comments received 7/1 7:26pm); resubmitted same day as Building Dept Review #2, awaiting outcome. LH00030 landscaping/hardscaping permit remains issued (6/30).",
       detailSteps: {
         "Arborist Pre-App Meeting": "Approved",
         "Permit Application Submitted (CommunityCore)": "Approved",
         "Application Received Confirmation": "Approved",
         "Permit Fees Paid": "Approved",
         "Stream Buffer / Stormwater Determination": "N/A",
-        "Plan / Engineering Review": "Approved",
-        "Revisions Resubmitted": "Approved",
-        "Permit Approved / Issued": "Approved",
+        "Plan / Engineering Review": "Revisions Needed",
+        "Revisions Resubmitted": "Submitted",
+        "Permit Approved / Issued": "Not Started",
         "Inspection(s) Scheduled": "Not Started",
         "Final Inspection / Closed": "Not Started"
       }
@@ -346,6 +346,26 @@ function seedData() {
       elements: ["Patio / Hardscaping","Impervious Surface Addition","Tree Impact / Removal","Fence","Retaining Wall","Drainage / Stormwater"],
       flags: ["Tall Wall","Tree Risk"],
       notes: "New backyard makeover, Proposal #19632 signed 6/26/26 (~$149,541 incl. permitting). Landscape design (Seas of Green, LDP-R6) shows retaining walls, hardscape, and grading near several large trees on site - schedule the Atlanta arborist pre-app meeting before submitting the permit application. Fence replacement noted as TBC on plan - confirm with client. Plan calls for an 8' HT natural stone retaining wall (46 LFt) - Atlanta typically requires engineered/stamped plans for walls over 4ft, which is not currently scoped in the proposal's permitting line items. No application submitted yet.",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "Not Started",
+        "Permit Application Submitted (Accela)": "Not Started",
+        "Intake Review": "Not Started",
+        "Additional Materials Requested": "N/A",
+        "Right-of-Way Permit": "N/A",
+        "Plan Review": "Not Started",
+        "Revisions Resubmitted": "Not Started",
+        "Permit Fees Paid": "Not Started",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p6", property: "LaRocca Residence - 848 Virginia Cir NE", opp: "20259",
+      permit: "", municipality: "Atlanta", stage: "intake",
+      elements: ["Retaining Wall","Drainage / Stormwater"],
+      flags: ["Design Redlines"],
+      notes: "New job - Proposal #20259 signed 6/15/26, $56,805 (demo of existing front/driveway retaining walls, new Techo-Bloc Raffinato front walls, CMU wall rebuild at neighbor's driveway, drainage line, plantings/sod, irrigation renovation). Design set (LS-1 Demolition, LS-2 Hardscape) has unresolved handwritten client redlines - wall material/detail specs, stepping stone layout behind the gate, tree save vs. silt fence question, driveway easement/limits of disturbance - needs to be finalized in CAD before permit submission. Lot 12, Virginia Ave Sub-Division Block 6, Land Lot 53, District 17, Fulton County. No permit application submitted yet.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Not Started",
         "Permit Application Submitted (Accela)": "Not Started",
