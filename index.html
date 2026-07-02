@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Permitting Kanban - View Only</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f7;
+    color: #1f2d3d;
+  }
+  .topbar {
+    padding: 14px 18px 10px;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e4e7;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .topbar h1 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    color: #1F4E5F;
+  }
+  .view-only-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: bold;
+    background: #EEF2F3;
+    color: #607080;
+    border: 1px solid #dde3e5;
+    border-radius: 10px;
+    padding: 1px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .topbar .sub {
+    font-size: 12px;
+    color: #667;
+    margin-bottom: 10px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+  .legend {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .legend label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 12px;
+    border: 1px solid #dde;
+  }
+  .chip {
+    width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+  }
+  .chip.Atlanta { background: #C00000; }
+  .chip.Decatur { background: #2E75B6; }
+  .chip.DeKalb { background: #548235; }
+  input[type="text"].search {
+    padding: 6px 10px;
+    border: 1px solid #ccd2d6;
+    border-radius: 6px;
+    font-size: 12px;
+    min-width: 200px;
+  }
+  .board {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    overflow-x: auto;
+    align-items: flex-start;
+  }
+  .column {
+    background: #eceff1;
+    border-radius: 8px;
+    width: 250px;
+    min-width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 130px);
+  }
+  .column-header {
+    padding: 10px 10px 8px;
+    font-size: 12.5px;
+    font-weight: bold;
+    color: #37474f;
+    border-bottom: 2px solid #cfd8dc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .column-header .count {
+    background: #cfd8dc;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 11px;
+    font-weight: normal;
+  }
+  .column-body {
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 60px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    margin-bottom: 8px;
+    padding: 9px 10px;
+    border-left: 5px solid #999;
+    font-size: 12px;
+  }
+  .card.Atlanta { border-left-color: #C00000; }
+  .card.Decatur { border-left-color: #2E75B6; }
+  .card.DeKalb { border-left-color: #548235; }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+  .muni-badge {
+    font-size: 9.5px;
+    font-weight: bold;
+    padding: 1px 6px;
+    border-radius: 8px;
+    color: #fff;
+  }
+  .muni-badge.Atlanta { background: #C00000; }
+  .muni-badge.Decatur { background: #2E75B6; }
+  .muni-badge.DeKalb { background: #548235; }
+  .permit-num { font-size: 10px; color: #78909c; }
+  .flags-row { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px; }
+  .flag-badge {
+    font-size: 9.5px; font-weight: bold; background: #FDECEA; color: #B3261E;
+    border: 1px solid #F4C7C3; border-radius: 8px; padding: 1px 6px;
+  }
+  .property-name { font-weight: bold; font-size: 13px; margin-bottom: 1px; }
+  .opp-num { font-size: 10.5px; color: #90a4ae; margin-bottom: 5px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 6px; }
+  .tag {
+    font-size: 9.5px;
+    background: #eef2f3;
+    border: 1px solid #dde3e5;
+    border-radius: 8px;
+    padding: 1px 6px;
+    color: #455a64;
+  }
+  .notes-box {
+    width: 100%;
+    font-size: 11.5px;
+    border: 1px solid #e3e7e9;
+    border-radius: 5px;
+    padding: 5px 6px;
+    min-height: 20px;
+    background: #fffef2;
+    color: #4a4030;
+    white-space: pre-wrap;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 6px;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    color: #1F4E5F;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+  .detail-box {
+    margin-top: 7px;
+    border-top: 1px dashed #e0e0e0;
+    padding-top: 6px;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 3px;
+  }
+  .detail-row span.step-name { font-size: 10.5px; color: #455a64; flex: 1; }
+  .detail-row span.step-status { font-size: 10px; padding: 1px 6px; border-radius: 4px; }
+  .status-Approved { color: #2e7d32; font-weight: bold; background: #E6F4EA; }
+  .status-Revisions_Needed { color: #c62828; font-weight: bold; background: #FDECEA; }
+  .status-Submitted, .status-Under_Review { color: #a17f00; font-weight: bold; background: #FFF6DD; }
+  .status-N_A { color: #b0b6b8; background: #F2F3F4; }
+  .status-Not_Started { color: #90a4ae; background: #F2F3F4; }
+  .empty-hint { font-size: 11px; color: #aab; text-align: center; padding: 16px 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Permitting Kanban Board <span class="view-only-badge">VIEW ONLY</span></h1>
+  <div class="sub">Colors = municipality. Click "Details" on a card for its municipality-specific step checklist. This is a snapshot, refreshed at least daily. <span id="syncLine"></span></div>
+  <div class="controls">
+    <div class="legend" id="muniFilters"></div>
+    <input type="text" class="search" id="searchBox" placeholder="Search property, opportunity #, permit #...">
+  </div>
+</div>
+
+<div class="board" id="board"></div>
+
+<script>
+const LAST_SYNCED_LABEL = "July 2, 2026";
+
+const COLUMNS = [
+  { id: "intake", label: "Pre-App / Intake" },
+  { id: "submitted", label: "Submitted" },
+  { id: "under_review", label: "Under Review" },
+  { id: "revisions", label: "Revisions Needed" },
+  { id: "fees", label: "Fees Paid" },
+  { id: "approved", label: "Approved / Issued" },
+  { id: "inspections", label: "Inspections" },
+  { id: "closed", label: "Closed" },
+];
+
+const STATUS_LIST = ["Not Started","Submitted","Under Review","Revisions Needed","Approved","N/A"];
+
+const MUNI_STEPS = {
+  Atlanta: [
+    "Arborist Pre-App Meeting","Permit Application Submitted (Accela)","Intake Review",
+    "Additional Materials Requested","Right-of-Way Permit","Plan Review",
+    "Revisions Resubmitted","Permit Fees Paid","Permit Approved / Issued",
+    "Inspection(s) Scheduled","Final Inspection / Closed"
+  ],
+  Decatur: [
+    "Arborist Pre-App Meeting","Permit Application Submitted (CommunityCore)",
+    "Application Received Confirmation","Permit Fees Paid",
+    "Stream Buffer / Stormwater Determination","Plan / Engineering Review",
+    "Revisions Resubmitted","Permit Approved / Issued","Inspection(s) Scheduled",
+    "Final Inspection / Closed"
+  ],
+  DeKalb: [
+    "Notice of Tree Removal (County Arborist)","Land Disturbance Permit (if triggered)",
+    "Building / Misc. Permit Application Submitted","Application Under Review",
+    "Additional Info / Corrections Requested",
+    "Variance / SLUP Request (if buffer or setback encroachment)","Permit Fees Paid",
+    "Permit Approved / Issued","Inspection(s) Scheduled","Final Inspection / Closed"
+  ]
+};
+
+function seedData() {
+  return [
+    {
+      id: "p1", property: "Wood Residence - 177 Ridgeland Ave", opp: "",
+      permit: "26DEC-LH00030 / 26DEC-FE00026 (fence)", municipality: "Decatur", stage: "approved",
+      elements: ["Patio / Hardscaping","Fence"],
+      flags: [],
+      notes: "26DEC-LH00030 (Landscaping/Hardscaping) was issued 6/30. Fence permit 26DEC-FE00026 passed Arborist and Planning/Zoning review 6/30 - confirm whether it has been formally issued too. Multiple resubmittals resolved an impervious-calc issue (riprap + gravel path) with Devon Boullion (Decatur engineering).",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "Approved",
+        "Permit Application Submitted (CommunityCore)": "Approved",
+        "Application Received Confirmation": "Approved",
+        "Permit Fees Paid": "Approved",
+        "Stream Buffer / Stormwater Determination": "N/A",
+        "Plan / Engineering Review": "Approved",
+        "Revisions Resubmitted": "Approved",
+        "Permit Approved / Issued": "Approved",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p2", property: "Gram / David & Brooke Residence - 202 5th Ave", opp: "",
+      permit: "26DEC-LH00031", municipality: "Decatur", stage: "under_review",
+      elements: ["Patio / Hardscaping","Deck","Impervious Surface Addition","Stream Buffer / Setback Encroachment"],
+      flags: [],
+      notes: "Engineering/Site Review resubmitted 7/1 (round 2) after a 6/11 \"Not Approved\" result; Building Dept review already approved. Stormwater ordinance buffer limits and a separate deck project were discussed with Devon Boullion (Decatur engineering) 6/16-6/18.",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "Approved",
+        "Permit Application Submitted (CommunityCore)": "Approved",
+        "Application Received Confirmation": "Approved",
+        "Permit Fees Paid": "Approved",
+        "Stream Buffer / Stormwater Determination": "Approved",
+        "Plan / Engineering Review": "Under Review",
+        "Revisions Resubmitted": "Submitted",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p3", property: "Dupre Residence - 690 Cumberland Rd NE", opp: "",
+      permit: "BB-202605373", municipality: "Atlanta", stage: "under_review",
+      elements: ["Patio / Hardscaping"],
+      flags: [],
+      notes: "Floor plan submitted 6/28 as the final intake requirement per Sharon Penick (Atlanta Office of Buildings). Awaiting confirmation of receipt / start of plan review as of 7/1. Elements list is a best guess from available emails - verify with the plan set.",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "N/A",
+        "Permit Application Submitted (Accela)": "Approved",
+        "Intake Review": "Approved",
+        "Additional Materials Requested": "Submitted",
+        "Right-of-Way Permit": "N/A",
+        "Plan Review": "Not Started",
+        "Revisions Resubmitted": "Not Started",
+        "Permit Fees Paid": "Not Started",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p4", property: "Burnt Creek Rd Residence - 2416 Burnt Creek Rd", opp: "",
+      permit: "3185678", municipality: "DeKalb", stage: "revisions",
+      elements: ["Deck"],
+      flags: [],
+      notes: "DeKalb's Application Pre-Screen (Review #837416) flagged the application as incomplete on 6/24 - needs a signed signature form and building application re-uploaded to ePermits, then click Resubmit. No confirmation of resubmittal found in the inbox as of 7/1 - needs follow-up.",
+      detailSteps: {
+        "Notice of Tree Removal (County Arborist)": "N/A",
+        "Land Disturbance Permit (if triggered)": "N/A",
+        "Building / Misc. Permit Application Submitted": "Approved",
+        "Application Under Review": "Approved",
+        "Additional Info / Corrections Requested": "Revisions Needed",
+        "Variance / SLUP Request (if buffer or setback encroachment)": "N/A",
+        "Permit Fees Paid": "Not Started",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p5", property: "Honeywill Residence - 458 Seminole Ave NE", opp: "19632",
+      permit: "", municipality: "Atlanta", stage: "intake",
+      elements: ["Patio / Hardscaping","Impervious Surface Addition","Tree Impact / Removal","Fence","Retaining Wall","Drainage / Stormwater"],
+      flags: ["Tall Wall","Tree Risk"],
+      notes: "New backyard makeover, Proposal #19632 signed 6/26/26 (~$149,541 incl. permitting). Landscape design (Seas of Green, LDP-R6) shows retaining walls, hardscape, and grading near several large trees on site - schedule the Atlanta arborist pre-app meeting before submitting the permit application. Fence replacement noted as TBC on plan - confirm with client. Plan calls for an 8' HT natural stone retaining wall (46 LFt) - Atlanta typically requires engineered/stamped plans for walls over 4ft, which is not currently scoped in the proposal's permitting line items. No application submitted yet.",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "Not Started",
+        "Permit Application Submitted (Accela)": "Not Started",
+        "Intake Review": "Not Started",
+        "Additional Materials Requested": "N/A",
+        "Right-of-Way Permit": "N/A",
+        "Plan Review": "Not Started",
+        "Revisions Resubmitted": "Not Started",
+        "Permit Fees Paid": "Not Started",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    }
+  ];
+}
+
+const state = { cards: seedData(), detailOpen: {}, filters: { Atlanta: true, Decatur: true, DeKalb: true }, search: "" };
+
+const syncEl = document.getElementById("syncLine");
+if (syncEl) syncEl.textContent = "Last synced: " + LAST_SYNCED_LABEL + ".";
+
+function statusClass(s) {
+  return "status-" + s.replace(/[\/\s]+/g, "_");
+}
+
+function renderFilters() {
+  const el = document.getElementById("muniFilters");
+  el.innerHTML = "";
+  ["Atlanta","Decatur","DeKalb"].forEach(m => {
+    const label = document.createElement("label");
+    label.innerHTML = '<span class="chip ' + m + '"></span>' + m;
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = state.filters[m];
+    cb.style.marginRight = "2px";
+    cb.addEventListener("change", () => {
+      state.filters[m] = cb.checked;
+      renderBoard();
+    });
+    label.prepend(cb);
+    el.appendChild(label);
+  });
+}
+
+function cardMatchesSearch(c) {
+  if (!state.search) return true;
+  const q = state.search.toLowerCase();
+  return (c.property||"").toLowerCase().includes(q) ||
+         (c.opp||"").toLowerCase().includes(q) ||
+         (c.permit||"").toLowerCase().includes(q);
+}
+
+function renderBoard() {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
+  COLUMNS.forEach(col => {
+    const colEl = document.createElement("div");
+    colEl.className = "column";
+    const cardsInCol = state.cards.filter(c => c.stage === col.id && state.filters[c.municipality] && cardMatchesSearch(c));
+    colEl.innerHTML = '<div class="column-header"><span>' + col.label + '</span><span class="count">' + cardsInCol.length + '</span></div>';
+    const body = document.createElement("div");
+    body.className = "column-body";
+    if (cardsInCol.length === 0) {
+      body.innerHTML = '<div class="empty-hint">No cards</div>';
+    }
+    cardsInCol.forEach(c => body.appendChild(renderCard(c)));
+    colEl.appendChild(body);
+    board.appendChild(colEl);
+  });
+}
+
+function renderCard(c) {
+  const card = document.createElement("div");
+  card.className = "card " + c.municipality;
+
+  if (c.flags && c.flags.length) {
+    const flagsRow = document.createElement("div");
+    flagsRow.className = "flags-row";
+    c.flags.forEach(f => {
+      const badge = document.createElement("span");
+      badge.className = "flag-badge";
+      badge.textContent = "⚠ " + f;
+      flagsRow.appendChild(badge);
+    });
+    card.appendChild(flagsRow);
+  }
+
+  const top = document.createElement("div");
+  top.className = "card-top";
+  top.innerHTML = '<span class="muni-badge ' + c.municipality + '">' + c.municipality + '</span><span class="permit-num">' + (c.permit || "") + '</span>';
+  card.appendChild(top);
+
+  const name = document.createElement("div");
+  name.className = "property-name";
+  name.textContent = c.property;
+  card.appendChild(name);
+
+  const opp = document.createElement("div");
+  opp.className = "opp-num";
+  opp.textContent = "Opp #" + (c.opp || "-");
+  card.appendChild(opp);
+
+  if (c.elements && c.elements.length) {
+    const tags = document.createElement("div");
+    tags.className = "tags";
+    c.elements.forEach(e => {
+      const t = document.createElement("span");
+      t.className = "tag";
+      t.textContent = e;
+      tags.appendChild(t);
+    });
+    card.appendChild(tags);
+  }
+
+  if (c.notes) {
+    const notes = document.createElement("div");
+    notes.className = "notes-box";
+    notes.textContent = c.notes;
+    card.appendChild(notes);
+  }
+
+  const footer = document.createElement("div");
+  footer.className = "card-footer";
+  const detailBtn = document.createElement("button");
+  detailBtn.className = "link-btn";
+  detailBtn.textContent = state.detailOpen[c.id] ? "Hide details" : "Details";
+  detailBtn.addEventListener("click", () => {
+    state.detailOpen[c.id] = !state.detailOpen[c.id];
+    renderBoard();
+  });
+  footer.appendChild(detailBtn);
+  card.appendChild(footer);
+
+  if (state.detailOpen[c.id]) {
+    const detail = document.createElement("div");
+    detail.className = "detail-box";
+    (MUNI_STEPS[c.municipality] || []).forEach(step => {
+      const status = (c.detailSteps && c.detailSteps[step]) || "Not Started";
+      const row = document.createElement("div");
+      row.className = "detail-row";
+      const span = document.createElement("span");
+      span.className = "step-name";
+      span.textContent = step;
+      row.appendChild(span);
+      const statusEl = document.createElement("span");
+      statusEl.className = "step-status " + statusClass(status);
+      statusEl.textContent = status;
+      row.appendChild(statusEl);
+      detail.appendChild(row);
+    });
+    card.appendChild(detail);
+  }
+
+  return card;
+}
+
+document.getElementById("searchBox").addEventListener("input", e => {
+  state.search = e.target.value;
+  renderBoard();
+});
+
+renderFilters();
+renderBoard();
+</script>
+</body>
+</html>
