@@ -223,7 +223,7 @@
 <div class="board" id="board"></div>
 
 <script>
-const LAST_SYNCED_LABEL = "July 17, 2026";
+const LAST_SYNCED_LABEL = "July 19, 2026";
 
 const COLUMNS = [
   { id: "intake", label: "Pre-App / Intake" },
@@ -306,7 +306,7 @@ function seedData() {
       permit: "BB-202605992 (resubmission; prior BB-202605373 voided)", municipality: "Atlanta", stage: "revisions",
       elements: ["Patio / Hardscaping"],
       flags: [],
-      notes: "7/17: City of Atlanta returned BB-202605992 (690 Cumberland Rd NE) with multiple revision requests via Accela: (1) Building Plan Review is ON HOLD (4:46pm notice) requiring a deck framing plan plus deck post/foundation detail - resubmit to residential-oob@atlantaga.gov; and (2) Arborist (B. Collins) requires the tree protection plan to show the entire property and the tree survey to include all trees, email jbcollins@atlantaga.gov once uploaded. Both are on top of the 7/16 site/plan-review revisions (cc dbanks@atlantaga.gov). All corrections must be resubmitted before the permit can be approved.",
+      notes: "7/19: Resubmission ON HOLD - P. Dooley is meeting the client Thursday (7/23) to settle design changes and recover ~300 SF of pervious area before Plants resubmits to the City of Atlanta. Underlying 7/17 Accela revisions still open: Building Plan Review ON HOLD (needs deck framing plan + deck post/foundation detail; resubmit to residential-oob@atlantaga.gov) and Arborist (B. Collins) needs the tree protection plan to show the whole property and the survey to include all trees.",
       detailSteps: {
         "Arborist Pre-App Meeting": "N/A",
         "Permit Application Submitted (Accela)": "Approved",
@@ -323,15 +323,15 @@ function seedData() {
     },
     {
       id: "p4", property: "Burnt Creek Rd Residence - 2416 Burnt Creek Rd", opp: "",
-      permit: "3185678", municipality: "DeKalb", stage: "approved",
+      permit: "3185678", municipality: "DeKalb", stage: "under_review",
       elements: ["Deck"],
       flags: [],
-      notes: "7/10: Permit fee ($1,033.49 - $983.49 building permit + $50 CC/CO fee) for building application #3185678 (client: Elberger) paid via operating account (PO required), per Hope's 7/9 fee notice forwarded to receipts same day. DeKalb confirmed the application itself was processed (7/9 agency responses). Now awaiting permit approval/issuance.",
+      notes: "7/17: DeKalb opened building application #3185678 (2416 Burnt Creek Rd, client Elberger) in the ePlans/ProjectDox electronic plan review system - Plants received a ProjectDox project invitation plus an 'Applicant Upload' task assignment. Plans must be uploaded (PDF, one sheet per file) before the County begins plan review; so the permit is NOT yet issued despite fees ($1,033.49) being paid 7/10.",
       detailSteps: {
         "Notice of Tree Removal (County Arborist)": "N/A",
         "Land Disturbance Permit (if triggered)": "N/A",
         "Building / Misc. Permit Application Submitted": "Approved",
-        "Application Under Review": "Approved",
+        "Application Under Review": "Under Review",
         "Additional Info / Corrections Requested": "Approved",
         "Variance / SLUP Request (if buffer or setback encroachment)": "N/A",
         "Permit Fees Paid": "Approved",
