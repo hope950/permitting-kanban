@@ -326,7 +326,7 @@ function seedData() {
       permit: "3185678", municipality: "DeKalb", stage: "revisions",
       elements: ["Deck"],
       flags: [],
-      notes: "7/28: DeKalb plan review on project #3185678 came back requesting corrections - the retaining wall must be clearly labeled on the site plan with Top of Wall (TW) and Bottom of Wall (BW) dimensions plus construction details, and confirmation of whether any wall is 4ft+ from footing to top (comments relayed by Hope to Seas of Green 7/27). Lizelle confirmed 7/28 the corrected set will be ready by Thursday 7/30. Permit still NOT issued; fees ($1,033.49) paid 7/10.",
+      notes: "7/31: Seas of Green delivered the corrected permit set R1 for 2416 Burnt Creek Rd (Elberger) - now labels the retaining wall Top of Wall (TW) and Bottom of Wall (BW) dimensions per the DeKalb reviewer's 7/28 correction request. Ready for Hope to upload via DeKalb ePlans and resubmit for project #3185678. Permit still NOT issued; fees ($1,033.49) paid 7/10.",
       detailSteps: {
         "Notice of Tree Removal (County Arborist)": "N/A",
         "Land Disturbance Permit (if triggered)": "N/A",
@@ -345,7 +345,7 @@ function seedData() {
       permit: "BB-202606494", municipality: "Atlanta", stage: "revisions",
       elements: ["Patio / Hardscaping","Impervious Surface Addition","Tree Impact / Removal","Fence","Retaining Wall","Drainage / Stormwater"],
       flags: [],
-      notes: "7/28: Atlanta application BB-202606494 (458 Seminole Ave NE) has been submitted and reviewed by City Planning Intake Staff, who found it incomplete - missing the owner's phone/email on the paper application and missing building codes on the plans. Must upload the fix via the ACA portal within 10 calendar days (email acoffee@atlantaga.gov) or the record closes and a new application is required. Retaining wall (8' HT, 46 LFt) still likely needs engineered/stamped plans not yet scoped in proposal #19632.",
+      notes: "7/31: Seas of Green delivered the corrected permit set R1 for 458 Seminole Ave NE (BB-202606494), now including the building codes the city's 7/28 intake review flagged as missing (incl. 2024 Int'l Fuel Gas Code w/ 2026 GA Amendments). Ready for Hope to upload via ACA within the 10-day window (contact acoffee@atlantaga.gov) or the record closes. Retaining wall (8' HT, 46 LFt) still likely needs engineered/stamped plans not yet scoped in proposal #19632.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Not Started",
         "Permit Application Submitted (Accela)": "Approved",
@@ -362,19 +362,39 @@ function seedData() {
     },
     {
       id: "p6", property: "LaRocca Residence - 848 Virginia Cir NE", opp: "20259",
-      permit: "BB-202606021 (retaining wall/drainage) / BB-202606099 (Miscellaneous)", municipality: "Atlanta", stage: "revisions",
+      permit: "BB-202606021 (retaining wall/drainage) / BB-202606099 (Miscellaneous)", municipality: "Atlanta", stage: "under_review",
       elements: ["Retaining Wall","Drainage / Stormwater"],
       flags: [],
-      notes: "7/22: A 4th Atlanta review on BB-202606099 now requires revision - Zoning Review (T. Daniel, tudaniel@atlantaga.gov, 'Revisions Reqd 1st Time'): provide top/bottom-of-wall measurements for all retaining walls; no more than two retaining walls (3 ft max each) in the required front yard per Sec. 16-28.008; add the missing lot-coverage calcs (50% district max). Still open from 7/21: Building Plan Review 'HOLD #1' (A. Green - wood trash-enclosure construction details + top/bottom-of-wall, any wall >4 ft needs an engineer stamp), Site Development Review (D. Banks - wall heights, site & disturbed-area acreage, cut/fill/debris quantities, proposed vs existing impervious quantities, erosion control plan), and Arborist (M. Humphrey - TPF for tree B at the driveway edge + TPF around tree A's CRZ). Resubmit via Accela/ACA and email residential-oob@atlantaga.gov. Companion app BB-202606021 (submitted 7/10) still awaiting City review.",
+      notes: "7/29: Revisions resubmitted to Atlanta's Accela portal for BB-202606099 (848 Virginia Cir NE) - trash bin details (LS-2), retaining wall details (LS-2), impervious area info (LS-8), and tree save adjustments (LS-6/LS-7). City confirmed receipt (M. Humphrey, allow 3-4 days for review) and the revised plans were returned to the assigned building reviewer. Companion app BB-202606021 (submitted 7/10) still awaiting City review.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Not Started",
         "Permit Application Submitted (Accela)": "Approved",
         "Intake Review": "Approved",
         "Additional Materials Requested": "Approved",
         "Right-of-Way Permit": "N/A",
-        "Plan Review": "Revisions Needed",
-        "Revisions Resubmitted": "Not Started",
+        "Plan Review": "Under Review",
+        "Revisions Resubmitted": "Submitted",
         "Permit Fees Paid": "Approved",
+        "Permit Approved / Issued": "Not Started",
+        "Inspection(s) Scheduled": "Not Started",
+        "Final Inspection / Closed": "Not Started"
+      }
+    },
+    {
+      id: "p7", property: "Neighbor Property - 844 Virginia Cir NE", opp: "",
+      permit: "", municipality: "Atlanta", stage: "intake",
+      elements: ["Retaining Wall"],
+      flags: [],
+      notes: "7/30: Hope sent D. Banks (Atlanta Site Development) a plan for removing a retaining wall portion on this property (next door to the LaRocca job at 848 Virginia Cir NE), asking whether it's sufficient to submit for permit or if a different form is needed for removal-only work. Awaiting city guidance before formal application.",
+      detailSteps: {
+        "Arborist Pre-App Meeting": "Not Started",
+        "Permit Application Submitted (Accela)": "Not Started",
+        "Intake Review": "Not Started",
+        "Additional Materials Requested": "Not Started",
+        "Right-of-Way Permit": "Not Started",
+        "Plan Review": "Not Started",
+        "Revisions Resubmitted": "Not Started",
+        "Permit Fees Paid": "Not Started",
         "Permit Approved / Issued": "Not Started",
         "Inspection(s) Scheduled": "Not Started",
         "Final Inspection / Closed": "Not Started"
