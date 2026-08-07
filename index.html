@@ -223,7 +223,7 @@
 <div class="board" id="board"></div>
 
 <script>
-const LAST_SYNCED_LABEL = "August 5, 2026";
+const LAST_SYNCED_LABEL = "August 7, 2026";
 
 const COLUMNS = [
   { id: "intake", label: "Pre-App / Intake" },
@@ -284,18 +284,18 @@ function seedData() {
     },
     {
       id: "p2", property: "Gram / David & Brooke Residence - 202 5th Ave", opp: "",
-      permit: "26DEC-LH00031 (issued) / 26DEC-FE00032 (fence, App #2964787)", municipality: "Decatur", stage: "under_review",
+      permit: "26DEC-LH00031 (issued) / 26DEC-FE00032 (fence, App #2964787)", municipality: "Decatur", stage: "revisions",
       elements: ["Patio / Hardscaping","Deck","Impervious Surface Addition","Stream Buffer / Setback Encroachment","Fence"],
       flags: [],
-      notes: "7/28: Fence Planning & Zoning Review #4 submittal started in Decatur CommunityCore for 26DEC-FE00032 (202 5th Ave), filing the R4 combined set Seas of Green delivered this morning to clear the 7/16 PZ Review #3 'Not Approved' finding - now awaiting the new review outcome. Main permit 26DEC-LH00031 remains in inspections (BMP Initial + Pre-Construction Meeting passed 7/13).",
+      notes: "8/4: Fence 26DEC-FE00032 (202 5th Ave) - Planning & Zoning Review #4 APPROVED (8/3). A new Building Dept + Engineering/Site submittal came back 8/4: Engineering/Site Review APPROVED, but Building Department Review NOT APPROVED - corrections needed (comment letter posted in CommunityCore) before resubmission. Main permit 26DEC-LH00031 unchanged, still in inspections.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Approved",
         "Permit Application Submitted (CommunityCore)": "Approved",
         "Application Received Confirmation": "Approved",
         "Permit Fees Paid": "Approved",
         "Stream Buffer / Stormwater Determination": "Approved",
-        "Plan / Engineering Review": "Under Review",
-        "Revisions Resubmitted": "Submitted",
+        "Plan / Engineering Review": "Revisions Needed",
+        "Revisions Resubmitted": "Not Started",
         "Permit Approved / Issued": "Approved",
         "Inspection(s) Scheduled": "Approved",
         "Final Inspection / Closed": "Not Started"
@@ -306,7 +306,7 @@ function seedData() {
       permit: "BB-202605992 (resubmission; prior BB-202605373 voided)", municipality: "Atlanta", stage: "revisions",
       elements: ["Patio / Hardscaping"],
       flags: [],
-      notes: "7/22: City of Atlanta Zoning Review on BB-202605992 returned 'Revisions Required - 1st Time' (reviewer Jacqualle Johnson): add top/bottom-of-wall elevations for the retaining wall, setback lines, existing/proposed lot-coverage calcs, reconcile the 'deck' vs 'landing pad' discrepancy, add the proposed stairs, and add the survey stone to the site plan; resubmit via ACA and notify residential-oob@atlantaga.gov. Still-open 7/17 items: Building Plan Review ON HOLD (deck framing + post/foundation detail) and Arborist (B. Collins) needs the TPP to show the whole property/all trees. P. Dooley was meeting the client 7/23 to settle design changes and recover ~300 SF of pervious area before resubmitting.",
+      notes: "8/4: Design team (Seas of Green) still finalizing revised drawings for resubmittal - confirming which requested change (4A vs 4B) replaces the prior design after Pam's client meeting. Not yet resubmitted to the City; prior 7/22 Zoning 'Revisions Required' items (wall elevations, setbacks, lot coverage, deck/landing pad discrepancy, stairs, survey stone) still open, as are the 7/17 Building Plan Review hold and Arborist TPP request.",
       detailSteps: {
         "Arborist Pre-App Meeting": "N/A",
         "Permit Application Submitted (Accela)": "Approved",
@@ -326,12 +326,12 @@ function seedData() {
       permit: "3185678", municipality: "DeKalb", stage: "revisions",
       elements: ["Deck"],
       flags: [],
-      notes: "7/31: Seas of Green delivered the corrected permit set R1 for 2416 Burnt Creek Rd (Elberger) - now labels the retaining wall Top of Wall (TW) and Bottom of Wall (BW) dimensions per the DeKalb reviewer's 7/28 correction request. Ready for Hope to upload via DeKalb ePlans and resubmit for project #3185678. Permit still NOT issued; fees ($1,033.49) paid 7/10.",
+      notes: "8/3: DeKalb Cycle #1 Overlay Review FAILED for permit 3185678 (2416 Burnt Creek Rd) - Site Plan, Dev Zoning Review, and Dev Overlay District Review all failed. Key issue: proposed work (incl. a front-yard retaining wall) extends into County ROW, which generally prohibits walls without an encroachment permit; also flagged setback, wall-height (TW/BW), and front-yard paving comments. 8/3-8/4: Hope directed Seas of Green to remove the front-yard half-moon retaining wall and revise the set; a new corrected set is expected imminently before resubmission.",
       detailSteps: {
         "Notice of Tree Removal (County Arborist)": "N/A",
         "Land Disturbance Permit (if triggered)": "N/A",
         "Building / Misc. Permit Application Submitted": "Approved",
-        "Application Under Review": "Under Review",
+        "Application Under Review": "Revisions Needed",
         "Additional Info / Corrections Requested": "Revisions Needed",
         "Variance / SLUP Request (if buffer or setback encroachment)": "N/A",
         "Permit Fees Paid": "Approved",
@@ -345,7 +345,7 @@ function seedData() {
       permit: "BB-202606494", municipality: "Atlanta", stage: "revisions",
       elements: ["Patio / Hardscaping","Impervious Surface Addition","Tree Impact / Removal","Fence","Retaining Wall","Drainage / Stormwater"],
       flags: [],
-      notes: "7/31: Seas of Green delivered the corrected permit set R1 for 458 Seminole Ave NE (BB-202606494), now including the building codes the city's 7/28 intake review flagged as missing (incl. 2024 Int'l Fuel Gas Code w/ 2026 GA Amendments). Ready for Hope to upload via ACA within the 10-day window (contact acoffee@atlantaga.gov) or the record closes. Retaining wall (8' HT, 46 LFt) still likely needs engineered/stamped plans not yet scoped in proposal #19632.",
+      notes: "8/4: City Planning Intake Review found BB-202606494 (458 Seminole Ave NE) still Incomplete - now requires an Arborist Pre-App Meeting (tree removal proposed) before plan review can proceed. Contact the arborist dept at 404-330-6874 or arborist.dcpd@atlantaga.gov, then email acoffee@atlantaga.gov once the meeting is done; 10-day window to respond before the record closes. (7/31: signed/notarized application was resubmitted internally.) Retaining wall (8' HT, 46 LFt) still likely needs engineered/stamped plans not yet scoped in proposal #19632.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Not Started",
         "Permit Application Submitted (Accela)": "Approved",
@@ -362,18 +362,18 @@ function seedData() {
     },
     {
       id: "p6", property: "LaRocca Residence - 848 Virginia Cir NE", opp: "20259",
-      permit: "BB-202606021 (retaining wall/drainage) / BB-202606099 (Miscellaneous)", municipality: "Atlanta", stage: "under_review",
+      permit: "BB-202606021 (retaining wall/drainage) / BB-202606099 (Miscellaneous)", municipality: "Atlanta", stage: "revisions",
       elements: ["Retaining Wall","Drainage / Stormwater"],
       flags: [],
-      notes: "7/29: Revisions resubmitted to Atlanta's Accela portal for BB-202606099 (848 Virginia Cir NE) - trash bin details (LS-2), retaining wall details (LS-2), impervious area info (LS-8), and tree save adjustments (LS-6/LS-7). City confirmed receipt (M. Humphrey, allow 3-4 days for review) and the revised plans were returned to the assigned building reviewer. Companion app BB-202606021 (submitted 7/10) still awaiting City review.",
+      notes: "8/4: BB-202606099 (848 Virginia Cir NE) - Zoning Review returned 'Revisions Required - 2nd Time' (8/3): must either apply for a special exception or remove one of the >2 retaining walls in the required front yard, provide TW/BW measurements for all walls, and add lot-coverage calcs. Meanwhile Building Plan Review was approved 8/3 (building dept only - other depts still pending) and the Arborist/tree review was approved 7/31 ('No Trees Destroyed'). Companion app BB-202606021 (retaining wall/drainage, submitted 7/10) still awaiting City review.",
       detailSteps: {
         "Arborist Pre-App Meeting": "Not Started",
         "Permit Application Submitted (Accela)": "Approved",
         "Intake Review": "Approved",
         "Additional Materials Requested": "Approved",
         "Right-of-Way Permit": "N/A",
-        "Plan Review": "Under Review",
-        "Revisions Resubmitted": "Submitted",
+        "Plan Review": "Revisions Needed",
+        "Revisions Resubmitted": "Not Started",
         "Permit Fees Paid": "Approved",
         "Permit Approved / Issued": "Not Started",
         "Inspection(s) Scheduled": "Not Started",
